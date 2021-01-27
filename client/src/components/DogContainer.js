@@ -14,7 +14,7 @@ export default function DogContainer(props) {
     })
   }, [])
   return (
-    <div>
+    <div className="column">
       <h2>List of All Good Boys</h2>
       {apiDogs.map(dog => {
         return (<DogThumb dog={dog} />)

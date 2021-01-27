@@ -21,11 +21,11 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <h1>Welcome to my Doggo App!!!</h1>
+      <header className="well">
+        <h1>🐶 Welcome to my Doggo App!!! 🦴</h1>
       </header>
-      <div>
-        <div>
+      <div className="columns">
+        <div className="column">
           <DogDetail dog={dog} />
           <MyDogs myDogs={myDogs}/>
         </div>
