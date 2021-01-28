@@ -8,6 +8,7 @@ import MyDogs from './components/MyDogs';
 function App() {
   let [dog, setDog] = useState(null);
   let [myDogs, setMyDogs] = useState([]);
+  let [api, setApi] = useState(false);
 
   useEffect(()=> {
     axios.get(`${process.env.REACT_APP_SERVER_URL}/`)
@@ -19,6 +20,11 @@ function App() {
     })
   }, []);
 
+  function selectDog(dog, api) {
+    setApi(api);
+    setDog(dog)
+  }
+
   return (
     <div className="App">
       <header className="well">
@@ -26,10 +32,10 @@ function App() {
       </header>
       <div className="columns">
         <div className="column">
-          <DogDetail dog={dog} />
-          <MyDogs myDogs={myDogs}/>
+          <DogDetail dog={dog} api={api}/>
+          <MyDogs myDogs={myDogs} selectDog={selectDog}/>
         </div>
-        <DogContainer />
+        <DogContainer selectDog={selectDog} />
       </div>
     </div>
   );
