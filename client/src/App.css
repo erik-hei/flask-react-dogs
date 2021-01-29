@@ -33,6 +33,12 @@ h1,h2 {
 .column {
   width: 50%;
 }
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
 .well img {
   display: inline-block;
   height: 100px;

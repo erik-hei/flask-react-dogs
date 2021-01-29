@@ -23,6 +23,7 @@ function App() {
   function selectDog(dog, api) {
     setApi(api);
     setDog(dog)
+    window.scrollTo(0,0)
   }
 
   return (

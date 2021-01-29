@@ -16,9 +16,11 @@ export default function DogContainer(props) {
   return (
     <div className="column">
       <h2>List of All Good Boys</h2>
-      {apiDogs.map(dog => {
-        return (<DogThumb dog={dog} selectDog={props.selectDog}/>)
-      })}
+      <div className="row">
+        {apiDogs.map(dog => {
+          return (<DogThumb dog={dog} selectDog={props.selectDog}/>)
+        })}
+      </div>
     </div>
   )
 }
