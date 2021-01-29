@@ -3,11 +3,7 @@ from flask import jsonify, request
 from flask_cors import CORS, cross_origin
 
 app.config['CORS_HEADERS'] = 'Content-Type'
-cors = CORS(app, resources={
-    r'/*': {
-        'origins': '*'
-    }
-})
+cors = CORS(app, origins=['*'], supports_credentials=True) 
 
 
 @app.route('/')
@@ -19,13 +15,16 @@ def home():
 @app.route('/dogs', methods=['POST'])
 def post_dogs():
   if request.method == 'POST':
-    print(request.form['api_key'])
-    # new_doggo = Doggo(**request.form)
-    # db.session.add(new_doggo)
-    # db.session.commit()
-    # return jsonify(new_doggo.as_dict())
-
-
+    data = request.get_json(silent=True)
+    new_doggo = Doggo(
+      api_key=data.get('api_key'), 
+      breed=data.get('breed'),
+      img=data.get('img'),
+      description=data.get('description')
+    )
+    db.session.add(new_doggo)
+    db.session.commit()
+    return jsonify(new_doggo.as_dict())
 
 if __name__=="__main__":
   app.run()

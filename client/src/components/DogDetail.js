@@ -18,14 +18,17 @@ export default function DogDetail(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(description)
-    axios.post(process.env.REACT_APP_SERVER_URL + "/dogs", {
+    let payload = {
       api_key: props.dog,
       breed: props.dog,
       img: apiImg,
       description: description
-    }).then(response => {
+    }
+    console.log("PAYLOAD", payload)
+    axios.post(process.env.REACT_APP_SERVER_URL + "/dogs", payload)
+    .then(response => {
       console.log(response)
+      props.getDogs()
       // show added dog
     })
   }

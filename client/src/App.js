@@ -11,14 +11,21 @@ function App() {
   let [api, setApi] = useState(false);
 
   useEffect(()=> {
+    getDogs()
+  }, []);
+
+  function getDogs() {
     axios.get(`${process.env.REACT_APP_SERVER_URL}/`)
     .then(response => {
       setMyDogs(response.data)
+      setApi(false)
       if (!dog) {
         setDog(response.data[0])
+      } else {
+        setDog(response.data[response.data.length - 1])
       }
     })
-  }, []);
+  }
 
   function selectDog(dog, api) {
     setApi(api);
@@ -33,7 +40,7 @@ function App() {
       </header>
       <div className="columns">
         <div className="column">
-          <DogDetail dog={dog} api={api}/>
+          <DogDetail dog={dog} api={api} getDogs={getDogs}/>
           <MyDogs myDogs={myDogs} selectDog={selectDog}/>
         </div>
         <DogContainer selectDog={selectDog} />
