@@ -26,5 +26,21 @@ def post_dogs():
     db.session.commit()
     return jsonify(new_doggo.as_dict())
 
+@app.route('/dogs/<id>', methods=['PUT', 'DELETE'])
+def update_delete_dog(id):
+  if request.method == 'PUT':
+    description = request.get_json().get('description')
+    query = Doggo(description=description).where(Doggo.id==id)
+    query.execute()
+    return jsonify(status={"code": 200, "message": "successfully updated"})
+  elif request.method == 'DELETE':
+    doggo = Doggo.query.get(id)
+    if doggo:
+      db.session.delete(doggo)
+      db.session.commit()
+      return jsonify(status={"code": 200, "message": "successfully deleted"})
+    else:
+      raise Exception(f'No User at id {id}')
+
 if __name__=="__main__":
   app.run()

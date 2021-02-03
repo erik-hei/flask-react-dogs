@@ -29,7 +29,7 @@ export default function DogDetail(props) {
     .then(response => {
       console.log(response)
       props.getDogs()
-      // show added dog
+      setDescription('');
     })
   }
 

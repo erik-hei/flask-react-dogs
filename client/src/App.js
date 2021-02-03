@@ -41,7 +41,7 @@ function App() {
       <div className="columns">
         <div className="column">
           <DogDetail dog={dog} api={api} getDogs={getDogs}/>
-          <MyDogs myDogs={myDogs} selectDog={selectDog}/>
+          <MyDogs myDogs={myDogs} selectDog={selectDog} getDogs={getDogs}/>
         </div>
         <DogContainer selectDog={selectDog} />
       </div>
