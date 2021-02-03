@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import DogEdit from './DogEdit';
+
 export default function DogDetail(props) {
   let [apiImg, setApiImg] = useState('');
   let [description, setDescription] = useState('');
+  let [edit, setEdit] = useState('false');
 
   useEffect(() => {
+    setEdit(false)
     if (props.api) {
       // console.log("This is our doggo", props.dog)
       axios.get("https://dog.ceo/api/breed/" + props.dog + "/images")
@@ -55,8 +59,14 @@ export default function DogDetail(props) {
       <div className="well">
         <img className="big-img" src={props.dog.img} />
         <div className="text-content">
-          <h2>{props.dog.breed}</h2>
-          <p>{props.dog.description}</p>
+          <h2>
+            {props.dog.breed}
+          </h2>
+          {!edit ?
+            (<p>{props.dog.description} <button onClick={() => setEdit(true)}>🖋</button></p>)
+            :
+            (<DogEdit setEdit={setEdit} dogId={props.dog.id} getDogs={props.getDogs} />)
+          }
         </div>
       </div>
     )
